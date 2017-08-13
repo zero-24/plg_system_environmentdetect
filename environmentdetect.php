@@ -109,10 +109,10 @@ class PlgSystemEnvironmentDetect extends JPlugin
 
 			// Craft the redirect url and 
 			$redirect            = $this->constructRedirect($environment);
-			$UserFriendlyMessage = $this->getUserFriendlyMessage($environment);
+			$userFriendlyMessage = $this->getUserFriendlyMessage($environment);
 
 			// Show the message and redirect
-			$this->app->enqueueMessage($UserFriendlyMessage, 'message');
+			$this->app->enqueueMessage($userFriendlyMessage, 'message');
 			$this->app->redirect(JUri::base() . $redirect . '.html');
 		}
 	}
