@@ -113,7 +113,7 @@ class PlgSystemEnvironmentDetect extends JPlugin
 
 			// Show the message and redirect
 			$this->app->enqueueMessage($UserFriendlyMessage, 'message');
-			$this->app->redirect($redirect . '.html');
+			$this->app->redirect(JUri::base() . $redirect . '.html');
 		}
 	}
 
