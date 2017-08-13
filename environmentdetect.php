@@ -6,6 +6,9 @@
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
 
+ use Joomla\CMS\Environment\Browser;
+ use Joomla\CMS\Uri\Uri;
+
 defined('_JEXEC') or die;
 
 /**
@@ -91,7 +94,7 @@ class PlgSystemEnvironmentDetect extends JPlugin
 	 */
 	public function onAfterRoute()
 	{
-		$url    = JUri::getInstance()->toString();
+		$url    = Uri::getInstance()->toString();
 		$detect = explode('/', $url);
 
 		if (end($detect) == 'detect')
@@ -225,7 +228,7 @@ class PlgSystemEnvironmentDetect extends JPlugin
 	private function getEnvironmentInfos()
 	{
 		// Get a instance of Joomla\CMS\Environment\Browser
-		$browser = JBrowser::getInstance();
+		$browser = Browser::getInstance();
 
 		// Get the values form the useragent string
 		$detectedPlatform = $browser->getPlatform();
