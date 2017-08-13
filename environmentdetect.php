@@ -1,15 +1,12 @@
 <?php
 /**
- * @package     Joomla.Plugin
- * @subpackage  System.environmentdetect
+ * EnvironmentDetect Plugin
  *
- * @copyright   Copyright (C) 2017 Tobias Zulauf, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @copyright  Copyright (C) 2017 Tobias Zulauf All rights reserved.
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
 
 defined('_JEXEC') or die;
-
-use Joomla\CMS\Environment\Browser;
 
 /**
  * Plugin class for Environment Detection
@@ -101,18 +98,22 @@ class PlgSystemEnvironmentDetect extends JPlugin
 		{
 			$environment = $this->getEnvironmentInfos();
 
+			// When we can not detect a supported platform just tell that on move to the homepage
 			if ($environment['platform'] === 'unknown')
 			{
-				$this->app->enqueueMessage(JText::_('PLG_SYSTEM_ENVIRONMENTDETECT_CANT_DETECT_SYSTEM'), 'error');
+				$this->app->enqueueMessage(JText::_('PLG_SYSTEM_ENVIRONMENTDETECT_CANT_DETECT_SYSTEM'), 'message');
+				$this->app->redirect('index.php');
 
 				return;
 			}
 
-			$redirectUrl         = $this->constructRedirectUrl($environment);
+			// Craft the redirect url and 
+			$redirect            = $this->constructRedirect($environment);
 			$UserFriendlyMessage = $this->getUserFriendlyMessage($environment);
 
+			// Show the message and redirect
 			$this->app->enqueueMessage($UserFriendlyMessage, 'message');
-			$this->app->redirect($redirectUrl . '.html');
+			$this->app->redirect($redirect . '.html');
 		}
 	}
 
@@ -177,7 +178,7 @@ class PlgSystemEnvironmentDetect extends JPlugin
 	 *
 	 * @since   1.0
 	 */
-	private function constructRedirectUrl($environment)
+	private function constructRedirect($environment)
 	{
 		if ($environment['browser'] === 'unknown')
 		{
@@ -224,7 +225,7 @@ class PlgSystemEnvironmentDetect extends JPlugin
 	private function getEnvironmentInfos()
 	{
 		// Get a instance of Joomla\CMS\Environment\Browser
-		$browser = Browser::getInstance();
+		$browser = JBrowser::getInstance();
 
 		// Get the values form the useragent string
 		$detectedPlatform = $browser->getPlatform();
