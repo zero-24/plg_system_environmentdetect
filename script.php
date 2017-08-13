@@ -11,7 +11,7 @@
  *
  * @since  1.0
  */
-class PlgContentMyDocsLanguageScript extends JInstallerScript
+class PlgSystemEnvironmentDetectScript extends JInstallerScript
 {
 	/**
 	 * Extension script constructor.
