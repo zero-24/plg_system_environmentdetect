@@ -112,10 +112,10 @@ class PlgSystemEnvironmentDetect extends JPlugin
 		}
 
 		// Craft the redirect url
-		$redirect = $this->constructRedirect($environment);
+		$redirect = str_replace('detect', $this->constructRedirect($environment), $url);
 
 		// Currently we don't add messages because the template does not support that
-		$this->app->redirect(JUri::base() . $redirect . '.html');
+		$this->app->redirect($redirect . '.html');
 	}
 
 	/**
