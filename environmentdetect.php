@@ -103,18 +103,15 @@ class PlgSystemEnvironmentDetect extends JPlugin
 			// When we can not detect a supported platform just tell that on move to the homepage
 			if ($environment['platform'] === 'unknown')
 			{
-				$this->app->enqueueMessage(JText::_('PLG_SYSTEM_ENVIRONMENTDETECT_CANT_DETECT_SYSTEM'), 'message');
 				$this->app->redirect('index.php');
 
 				return;
 			}
 
 			// Craft the redirect url and 
-			$redirect            = $this->constructRedirect($environment);
-			$userFriendlyMessage = $this->getUserFriendlyMessage($environment);
+			$redirect = $this->constructRedirect($environment);
 
-			// Show the message and redirect
-			$this->app->enqueueMessage($userFriendlyMessage, 'message');
+			// Currently we don't add messages because the template does not support that
 			$this->app->redirect(JUri::base() . $redirect . '.html');
 		}
 	}
