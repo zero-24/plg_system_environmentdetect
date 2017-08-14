@@ -96,24 +96,26 @@ class PlgSystemEnvironmentDetect extends JPlugin
 		$url    = JUri::getInstance()->toString();
 		$detect = explode('/', $url);
 
-		if (end($detect) == 'detect')
+		if (end($detect) !== 'detect')
 		{
-			$environment = $this->getEnvironmentInfos();
-
-			// When we can not detect a supported platform just tell that on move to the homepage
-			if ($environment['platform'] === 'unknown')
-			{
-				$this->app->redirect('index.php');
-
-				return;
-			}
-
-			// Craft the redirect url
-			$redirect = $this->constructRedirect($environment);
-
-			// Currently we don't add messages because the template does not support that
-			$this->app->redirect(JUri::base() . $redirect . '.html');
+			return;
 		}
+
+		$environment = $this->getEnvironmentInfos();
+
+		// When we can not detect a supported platform just tell that on move to the homepage
+		if ($environment['platform'] === 'unknown')
+		{
+			$this->app->redirect('index.php');
+
+			return;
+		}
+
+		// Craft the redirect url
+		$redirect = $this->constructRedirect($environment);
+
+		// Currently we don't add messages because the template does not support that
+		$this->app->redirect(JUri::base() . $redirect . '.html');
 	}
 
 	/**
