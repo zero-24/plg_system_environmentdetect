@@ -8,6 +8,8 @@
 
 defined('_JEXEC') or die;
 
+jimport('joomla.environment.browser');
+
 /**
  * Plugin class for Environment Detection
  *
