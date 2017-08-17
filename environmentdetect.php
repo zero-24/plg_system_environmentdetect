@@ -56,6 +56,7 @@ class PlgSystemEnvironmentDetect extends JPlugin
 		'chrome'  => 'Google Chrome',
 		'msie'    => 'Microsoft Internet Explorer',
 		'mozilla' => 'Mozilla Firefox',
+		'safari'  => 'Apple Safari',
 	);
 
 	/**
