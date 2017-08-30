@@ -97,7 +97,7 @@ class PlgSystemEnvironmentDetect extends JPlugin
 		$url    = JUri::getInstance()->toString();
 		$detect = explode('/', $url);
 
-		if (end($detect) !== 'detect')
+		if (end($detect) !== 'detect.html')
 		{
 			return;
 		}
@@ -114,7 +114,7 @@ class PlgSystemEnvironmentDetect extends JPlugin
 		}
 
 		// Craft the redirect url and a user friendly message
-		$redirect            = str_replace('detect', $this->constructRedirect($environment), $url);
+		$redirect            = str_replace('detect.html', $this->constructRedirect($environment), $url);
 		$userFriendlyMessage = $this->getUserFriendlyMessage($environment);
 
 		// Show the message and redirect
