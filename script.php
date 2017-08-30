@@ -23,5 +23,10 @@ class PlgSystemEnvironmentDetectScript extends JInstallerScript
 		// Define the minumum versions to be supported.
 		$this->minimumJoomla = '3.7';
 		$this->minimumPhp    = '7.0';
+
+		$this->deleteFiles = array(
+			'/plugins/system/environmentdetect/language/en-GB/en-GB.plg_system_environmentdetect.sys.ini',
+			'/plugins/system/environmentdetect/language/de-DE/de-DE.plg_system_environmentdetect.sys.ini',
+		);
 	}
 }
