@@ -12,6 +12,7 @@
 		<downloads>
 			<downloadurl type="full" format="zip">https://github.com/zero-24/plg_system_environmentdetect/releases/download/1.0.1/plg_system_environmentdetect.zip</downloadurl>
 		</downloads>
+		<sha512>8655b55b1159f5c3f42da5ceaa5c7ebada45b6d30e3a9824cef5a1687b484e296a86b274680b4a945b7cd988695202bf73ec2bce3387c52e25d0be01583ae4db</sha512>
 		<tags>
 			<tag>stable</tag>
 		</tags>
