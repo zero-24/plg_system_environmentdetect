@@ -97,6 +97,9 @@ class PlgSystemEnvironmentDetect extends JPlugin
 		$url    = JUri::getInstance()->toString();
 		$detect = explode('/', $url);
 
+		// Load language.
+		$this->loadLanguage();
+
 		if (end($detect) !== 'detect.html')
 		{
 			return;
