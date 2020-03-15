@@ -1,18 +1,18 @@
 <?xml version="1.0" ?>
 <updates>
 	<update>
-		<name>EnvironmentDetect 1.0.1</name>
+		<name>EnvironmentDetect 1.0.2</name>
 		<description>EnvironmentDetect Plugin</description>
 		<element>environmentdetect</element>
 		<type>plugin</type>
 		<folder>system</folder>
 		<client>site</client>
-		<version>1.0.1</version>
+		<version>1.0.2</version>
 		<infourl title="EnvironmentDetect Plugin">https://github.com/zero-24/plg_system_environmentdetect</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/zero-24/plg_system_environmentdetect/releases/download/1.0.1/plg_system_environmentdetect.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/zero-24/plg_system_environmentdetect/releases/download/1.0.2/plg_system_environmentdetect.zip</downloadurl>
 		</downloads>
-		<sha512>8655b55b1159f5c3f42da5ceaa5c7ebada45b6d30e3a9824cef5a1687b484e296a86b274680b4a945b7cd988695202bf73ec2bce3387c52e25d0be01583ae4db</sha512>
+		<sha512>1f5a9ee788f756cc9b1d075c003c89ca5ab44fc721f873d53b94f3e80c4dfdd9063a9d39d9bba276803fe421cbf1cfeef085cda74d8cfc920ae6aeee1ac6447e</sha512>
 		<tags>
 			<tag>stable</tag>
 		</tags>
