@@ -8,14 +8,18 @@
 
 defined('_JEXEC') or die;
 
-jimport('joomla.environment.browser');
+use Joomla\CMS\Application\CMSApplication;
+use Joomla\CMS\Environment\Browser;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Uri\Uri;
 
 /**
  * Plugin class for Environment Detection
  *
  * @since  1.0
  */
-class PlgSystemEnvironmentDetect extends JPlugin
+class PlgSystemEnvironmentDetect extends CMSPlugin
 {
 	/**
 	 * Affects constructor behavior. If true, language files will be loaded automatically.
@@ -28,7 +32,7 @@ class PlgSystemEnvironmentDetect extends JPlugin
 	/**
 	 * Application object.
 	 *
-	 * @var    JApplicationCms
+	 * @var    CMSApplication
 	 * @since  1.0
 	 */
 	protected $app;
@@ -39,10 +43,10 @@ class PlgSystemEnvironmentDetect extends JPlugin
 	 * @var    array
 	 * @since  1.0
 	 */
-	private $supportedPlatforms = array(
+	private $supportedPlatforms = [
 		'win' => 'Microsoft Windows',
 		'mac' => 'Mac OS / OS X',
-	);
+	];
 
 	/**
 	 * Holds the current supported browsers by the project plus a user friendly name
@@ -50,14 +54,14 @@ class PlgSystemEnvironmentDetect extends JPlugin
 	 * @var    array
 	 * @since  1.0
 	 */
-	private $supportedBrowsers = array(
+	private $supportedBrowsers = [
 		'opera'   => 'Opera',
 		'edge'    => 'Microsoft Edge',
 		'chrome'  => 'Google Chrome',
 		'msie'    => 'Microsoft Internet Explorer',
 		'mozilla' => 'Mozilla Firefox',
 		'safari'  => 'Apple Safari',
-	);
+	];
 
 	/**
 	 * Match the supported platform to the URLs
@@ -65,10 +69,10 @@ class PlgSystemEnvironmentDetect extends JPlugin
 	 * @var    array
 	 * @since  1.0
 	 */
-	private $platformToUrl = array(
+	private $platformToUrl = [
 		'win' => 'windows',
 		'mac' => 'apple-mac-os',
-	);
+	];
 
 	/**
 	 * Match the supported browser to the URLs
@@ -76,14 +80,14 @@ class PlgSystemEnvironmentDetect extends JPlugin
 	 * @var    array
 	 * @since  1.0
 	 */
-	private $browserToUrl = array(
+	private $browserToUrl = [
 		'opera'   => 'opera',
 		'edge'    => 'microsoft-edge',
 		'chrome'  => 'google-chrome',
 		'msie'    => 'internet-explorer-11',
 		'mozilla' => 'mozilla-firefox',
 		'safari'  => 'safari',
-	);
+	];
 
 	/**
 	 * Listener for the `onAfterRoute` event
@@ -94,11 +98,8 @@ class PlgSystemEnvironmentDetect extends JPlugin
 	 */
 	public function onAfterRoute()
 	{
-		$url    = JUri::getInstance()->toString();
+		$url    = Uri::getInstance()->toString();
 		$detect = explode('/', $url);
-
-		// Load language.
-		$this->loadLanguage();
 
 		if (end($detect) !== 'detect.html')
 		{
@@ -110,7 +111,7 @@ class PlgSystemEnvironmentDetect extends JPlugin
 		// When we can not detect a supported platform just tell that on move to the homepage
 		if ($environment['platform'] === 'unknown')
 		{
-			$this->app->enqueueMessage(JText::_('PLG_SYSTEM_ENVIRONMENTDETECT_CANT_DETECT_SYSTEM'), 'message');
+			$this->app->enqueueMessage(Text::_('PLG_SYSTEM_ENVIRONMENTDETECT_CANT_DETECT_SYSTEM'), 'message');
 			$this->app->redirect('index.php');
 
 			return;
@@ -139,14 +140,14 @@ class PlgSystemEnvironmentDetect extends JPlugin
 		if ($environment['browser'] === 'unknown')
 		{
 			// We have just detected a supported platform
-			return JText::sprintf(
+			return Text::sprintf(
 				'PLG_SYSTEM_ENVIRONMENTDETECT_DETECTED_JUST_PLATFORM',
 				$this->getUserFriendlyPlatform($environment['platform'])
 			);
 		}
 
 		// We have detected a supported platform and browser
-		return JText::sprintf(
+		return Text::sprintf(
 			'PLG_SYSTEM_ENVIRONMENTDETECT_DETECTED_PLATFORM_AND_BROWSER',
 			$this->getUserFriendlyPlatform($environment['platform']),
 			$this->getUserFriendlyBrowser($environment['browser'])
@@ -233,17 +234,17 @@ class PlgSystemEnvironmentDetect extends JPlugin
 	private function getEnvironmentInfos()
 	{
 		// Get a instance of Joomla\CMS\Environment\Browser
-		$browser = JBrowser::getInstance();
+		$browser = Browser::getInstance();
 
 		// Get the values form the useragent string
 		$detectedPlatform = $browser->getPlatform();
 		$detectedBrowser  = $browser->getBrowser();
 
 		// Prepare the return values
-		$environmentInfos = array(
+		$environmentInfos = [
 			'platform' => 'unknown',
 			'browser'  => 'unknown',
-		);
+		];
 
 		// Set the platform value when we support it.
 		if (array_key_exists($detectedPlatform, $this->supportedPlatforms))

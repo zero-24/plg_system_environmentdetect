@@ -8,12 +8,14 @@
 
  defined('_JEXEC') or die; 
 
+use Joomla\CMS\Installer\InstallerScript;
+
 /**
  * Installation class to perform additional changes during install/uninstall/update
  *
  * @since  1.0
  */
-class PlgSystemEnvironmentDetectInstallerScript extends JInstallerScript
+class PlgSystemEnvironmentDetectInstallerScript extends InstallerScript
 {
 	/**
 	 * Extension script constructor.
@@ -23,7 +25,7 @@ class PlgSystemEnvironmentDetectInstallerScript extends JInstallerScript
 	public function __construct()
 	{
 		// Define the minumum versions to be supported.
-		$this->minimumJoomla = '3.7';
-		$this->minimumPhp    = '7.0';
+		$this->minimumJoomla = '3.10';
+		$this->minimumPhp    = '7.2.5';
 	}
 }
