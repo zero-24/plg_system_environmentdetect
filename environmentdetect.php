@@ -30,14 +30,6 @@ class PlgSystemEnvironmentDetect extends CMSPlugin
 	protected $autoloadLanguage = true;
 
 	/**
-	 * Application object.
-	 *
-	 * @var    CMSApplication
-	 * @since  1.0
-	 */
-	protected $app;
-
-	/**
 	 * Holds the current supported platforms by the project plus a user friendly name
 	 *
 	 * @var    array
@@ -111,8 +103,8 @@ class PlgSystemEnvironmentDetect extends CMSPlugin
 		// When we can not detect a supported platform just tell that on move to the homepage
 		if ($environment['platform'] === 'unknown')
 		{
-			$this->app->enqueueMessage(Text::_('PLG_SYSTEM_ENVIRONMENTDETECT_CANT_DETECT_SYSTEM'), 'message');
-			$this->app->redirect('index.php');
+			$this->getApplication()->enqueueMessage(Text::_('PLG_SYSTEM_ENVIRONMENTDETECT_CANT_DETECT_SYSTEM'), 'message');
+			$this->getApplication()->redirect('index.php');
 
 			return;
 		}
@@ -122,8 +114,8 @@ class PlgSystemEnvironmentDetect extends CMSPlugin
 		$userFriendlyMessage = $this->getUserFriendlyMessage($environment);
 
 		// Show the message and redirect
-		$this->app->enqueueMessage($userFriendlyMessage, 'message');
-		$this->app->redirect($redirect . '.html');
+		$this->getApplication()->enqueueMessage($userFriendlyMessage, 'message');
+		$this->getApplication()->redirect($redirect . '.html');
 	}
 
 	/**
